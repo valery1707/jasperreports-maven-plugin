@@ -232,6 +232,10 @@ public class JasperReportsMojo
         getLog().debug( "classpathElements = " + classpathElements );
         getLog().debug( "additionalClasspath = " + additionalClasspath );
 
+        if (!sourceDirectory.exists()) {
+            getLog().info("Source directory does not exists - skip compiling JasperReports");
+            return;
+        }
         checkDir( javaDirectory, "Directory for generated java sources", true );
         checkDir( sourceDirectory, "Source directory", false );
         checkDir( outputDirectory, "Target directory", true );
