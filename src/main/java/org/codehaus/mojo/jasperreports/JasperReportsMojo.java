@@ -278,7 +278,9 @@ public class JasperReportsMojo
             JRProperties.setProperty( JRProperties.COMPILER_CLASSPATH, classpath );
             JRProperties.setProperty( JRProperties.COMPILER_TEMP_DIR, javaDirectory.getAbsolutePath() );
             JRProperties.setProperty( JRProperties.COMPILER_KEEP_JAVA_FILE, keepJava );
-            JRProperties.setProperty( JRProperties.COMPILER_CLASS, compiler );
+            if (compiler != null && compiler.trim().length() > 0 && !compiler.equals("empty")) {
+                JRProperties.setProperty( JRProperties.COMPILER_CLASS, compiler );
+            }
             JRProperties.setProperty( JRProperties.COMPILER_XML_VALIDATION, xmlValidation );
             
             Compiler compilerMaven;
