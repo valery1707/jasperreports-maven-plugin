@@ -86,6 +86,13 @@ public class JasperReportsMojo
     private MavenSession session;
 
     /**
+     * Property for skip execution
+     *
+     * @parameter default-value="false"
+     */
+    private boolean skip;
+
+    /**
      * This is where the generated java sources are stored.
      * 
      * @parameter expression="${project.build.directory}/jasperreports/java"
@@ -231,6 +238,11 @@ public class JasperReportsMojo
         getLog().debug( "compiler = " + compiler );
         getLog().debug( "classpathElements = " + classpathElements );
         getLog().debug( "additionalClasspath = " + additionalClasspath );
+
+        if (skip) {
+            getLog().info("Skip compiling JasperReports");
+            return;
+        }
 
         if (!sourceDirectory.exists()) {
             getLog().info("Source directory does not exists - skip compiling JasperReports");
